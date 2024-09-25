@@ -44,7 +44,10 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: ./node_modules/.bin/sequelize-cli db:seed:all
 
-      # Step 8: Deploy to Railway
+      # Step 8: Install Railway CLI
+      - name: Install Railway CLI
+        run: npm install -g railway
+
+      # Step 9: Deploy to Railway
       - name: Deploy to Railway
         run: railway up
-
