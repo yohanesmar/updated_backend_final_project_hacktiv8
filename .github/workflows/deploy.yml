@@ -3,7 +3,7 @@ name: Deploy and Seed Database
 on:
   push:
     branches:
-      - main  # Adjust this to your deployment branch
+      - main  
 
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Adjust if using a different Node.js version
+          node-version: '16'  
 
       # Step 3: Install project dependencies
       - name: Install dependencies
@@ -28,17 +28,17 @@ jobs:
       - name: Make sequelize-cli executable
         run: chmod +x ./node_modules/.bin/sequelize-cli
 
-      # Step 5: Set environment to production
+      # Step 5: Set to prod
       - name: Set environment to production
         run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
-      # Step 6: Run migrations using sequelize-cli
+      # Step 6: Run migrations
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: ./node_modules/.bin/sequelize-cli db:migrate
 
-      # Step 7: Seed the database using sequelize-cli
+      # Step 7: Seed 
       - name: Seed the database
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

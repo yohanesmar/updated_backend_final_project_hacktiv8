@@ -19,9 +19,6 @@ app.listen(PORT, async () => {
     await sequelize.authenticate();
     console.log('Database connected successfully.');
 
-    // Removed migrateAndSeed function call
-    // await migrateAndSeed();  // This is no longer needed since seeding is handled by seeders and GitHub Actions
-
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
