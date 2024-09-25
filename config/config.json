@@ -15,7 +15,7 @@
   },
   "production": {
     "username": "postgres",
-    "password": "WcUAEUBaiqtHrTkZvsdIJrOKMjSgrZqJ",
+    "password": "XAkwMKVNwcGaJNLfmlyamCRYyHuthdEI",
     "database": "railway",
     "host": "postgres.railway.internal",
     "port": "5432",
