@@ -60,4 +60,3 @@ module.exports = {
     await queryInterface.bulkDelete('Movies', null, {});
   }
 };
-

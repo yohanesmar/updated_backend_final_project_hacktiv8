@@ -1,0 +1,49 @@
+name: Deploy and Seed Database
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your deployment branch if necessary
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Using Node.js 16, adjust if necessary
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Set environment to production
+      - name: Set environment to production
+        run: |
+          echo "NODE_ENV=production" >> $GITHUB_ENV
+
+      # Step 5: Run Sequelize Migrations
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Your Railway database connection string
+        run: |
+          npx sequelize-cli db:migrate
+
+      # Step 6: Seed the database with initial data
+      - name: Seed the database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Your Railway database connection string
+        run: |
+          npx sequelize-cli db:seed:all
+
+      # Step 7: Deploy the application to Railway
+      - name: Deploy to Railway
+        run: |
+          railway up
