@@ -1,5 +1,5 @@
 const express = require('express');
-const { sequelize, migrateAndSeed } = require('./models');
+const { sequelize } = require('./models');  // Removed migrateAndSeed
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,9 +17,12 @@ app.listen(PORT, async () => {
     await sequelize.authenticate();
     console.log('Database connected successfully.');
 
-    await migrateAndSeed();
+    // Removed migrateAndSeed function call
+    // await migrateAndSeed();  // This is no longer needed since seeding is handled by seeders and GitHub Actions
+
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
 });
+
 
