@@ -13,6 +13,8 @@ app.use(authRoutes);
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
 
+  console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
   try {
     await sequelize.authenticate();
     console.log('Database connected successfully.');
