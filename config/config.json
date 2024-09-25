@@ -14,11 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "kCKVSSxtIDCWXAfLsCrQsqKYIgQPrJYN",
-    "database": "railway",
-    "host": "postgres.railway.internal",
-    "port": "5432",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
   }
 }
