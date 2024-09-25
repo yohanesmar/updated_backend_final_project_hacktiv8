@@ -4,8 +4,6 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {
-    static associate(models) {
-    }
   }
   Movie.init({
     title: DataTypes.STRING,
