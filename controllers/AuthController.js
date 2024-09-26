@@ -6,6 +6,12 @@ class AuthController {
     static async register(req, res) {
         try {
             const { name, username, email, password, address, phoneNumber } = req.body;
+    
+            const existingUser = await User.findOne({ where: { email } });
+            if (existingUser) {
+                return res.status(400).json({ error: "Email already in use" });
+            }
+    
             const hashedPassword = bcrypt.hashSync(password, 10);
             const user = await User.create({
                 name,
@@ -16,7 +22,7 @@ class AuthController {
                 address,
                 phoneNumber
             });
-
+    
             res.status(201).json({
                 message: "Success creating new user",
                 id: user.id,
@@ -30,7 +36,7 @@ class AuthController {
         } catch (err) {
             res.status(500).json({ error: "Internal server error" });
         }
-    }
+    }    
 
     static async login(req, res) {
         try {
